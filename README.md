@@ -76,3 +76,29 @@ ansible-playbook -i hosts server-mongodb.yml --list-tasks
 ```
 
 Again, using / configuring ansible isn't really in scope here (yet :D)
+
+### Test It!
+
+The included Dockerfile can be used to spin up an openSUSE container </br>
+which contains the minimal number of packages required for testing.
+
+You must first generate an ssh key pair like so:
+
+```
+ssh-keygen -t ed25519 -a 100 -C ansible-ssh -f ansible-ssh.key
+```
+
+Then build and run the container:
+
+```
+docker build -t myrepo/mdb-test .
+docker run -d myrepo/mdb-test 
+```
+
+Check the ssh connection:
+
+```
+ssh -l root -i ansible-ssh.key <container_ip>
+```
+
+Then run the playbook! (see above).
