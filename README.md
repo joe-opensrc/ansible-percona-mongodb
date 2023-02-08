@@ -1,19 +1,19 @@
 
-  # An ansible role to install the vanilla Percona MongoDB Suite.
+## An ansible role to install the vanilla Percona MongoDB Suite.
 
 Installs onto (tested):
   - SLES:     v15.3 (HPC)
   - OpenSUSE: v15.2
   - Debian:   v9.2
 
-Dependencies:
+### Dependencies:
 
   Host:
-      - ansible: v2.10.4
-      - python:  v3.8.10
+   - ansible: v2.10.4
+   - python:  v3.8.10
 
   Target hosts:
-    - python:  v3.8.10
+   - python:  v3.8.10
 
 Steps to prepare:
   - install ansible onto your management machine
@@ -22,7 +22,7 @@ Steps to prepare:
   - run the playbook against the target hosts
 
 
-## Install ansible onto your management machine:
+### Install ansible onto your management machine:
 e.g., into a virtual python environment.  
 
 ```
@@ -33,19 +33,24 @@ pip install ansible==2.10.4
 
 You don't have to use virtualenv, or a specific version of ansible of course.
 
-For example, you might try `python3 -m venv ~/pyvirts/ansible`.
-but this hasn't been tested here, and is little beyond the scope of this document ;)
+For example, you might try `python3 -m venv ~/pyvirts/ansible`.</br>
+However, this hasn't been tested here, and is little beyond the scope of this document ;)
  
-## Clone the ansible role + playbook
+### Clone the ansible role + playbook
 
 git clone https://gitlab.com/joe-opensrc/ansible-percona-mongodb.git
 cd ansible-percona-mongodb
 
+### Correctly configure hostnames
 
-## Correctly configure hostnames
+TODO: Instructions to follow...
 
+```
 cd hosts
-cat static-hosts
+vim static-hosts # 
+```
+
+E.g.,
 
 ```
 all:
