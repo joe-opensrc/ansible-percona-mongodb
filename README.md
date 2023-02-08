@@ -13,7 +13,7 @@ Installs onto (tested):
    - python:  v3.8.10
 
   Target hosts:
-   - python:  v3.8.10
+   - python:  v3.x (v3.8.10 tested)
 
 ### Steps to prepare:
   - install ansible onto your management machine
