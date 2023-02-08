@@ -38,9 +38,10 @@ However, this hasn't been tested here, and is little beyond the scope of this do
  
 ### Clone the ansible role + playbook
 
+```
 git clone https://gitlab.com/joe-opensrc/ansible-percona-mongodb.git
 cd ansible-percona-mongodb
-
+```
 ### Correctly configure hostnames
 
 TODO: Instructions to follow...
@@ -67,12 +68,11 @@ source ~/pyvirts/ansible/bin/activate
 ansible-playbook -i hosts server-mongodb.yml
 ```
 
-## To check the tags / tasks
+### To check the tags / tasks
 
 ```
 ansible-playbook -i hosts server-mongodb.yml --list-tags
 ansible-playbook -i hosts server-mongodb.yml --list-tasks
-
 ```
 
 Again, using / configuring ansible isn't really in scope here (yet :D)
