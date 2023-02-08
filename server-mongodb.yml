@@ -1,0 +1,7 @@
+---
+- hosts: 
+    - mdb-test-server1
+  gather_facts: yes
+ 
+  roles:
+    - role: server_mongodb

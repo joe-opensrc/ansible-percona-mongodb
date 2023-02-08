@@ -1,0 +1,30 @@
+---
+role:
+  install.yml: 
+    - uses tags + facts
+    - include_tasks: install/Suse.yml when ansible_fact[os_family] == 'Suse'
+  install:
+    Suse.yml
+    Debian.yml
+    RedHat.yml
+
+---
+role:
+  install:
+    main.yml [ tags + facts ]
+    zypper.yml
+    apt.yml
+    yum.yml
+
+
+---
+<2022-02-10 [17:13:07]>
+  wrangle users
+  install hashicorp-vault
+  install mongodb
+  configure mongodb:
+    
+  
+
+
+

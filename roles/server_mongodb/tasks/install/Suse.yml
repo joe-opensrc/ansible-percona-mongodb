@@ -1,0 +1,151 @@
+---
+# install percona mongodb server + backup linux generic binaries
+
+- name: Install prequisites via package manager
+  become: yes
+  register: zypper
+  community.general.zypper:
+    update_cache: yes
+    state: present
+    type: package
+    name:
+      - tar
+      - gzip
+      - libdb-4_8-devel
+      - groff
+      - strace
+      - git
+      - jq
+      - timezone
+
+- name: Report on zypper install
+  ansible.builtin.debug:
+    msg: "{{ zypper }}"
+
+- name: Check we need to build and install libldap
+  register: libldap_so
+  ansible.builtin.stat:
+    path: /usr/local/lib/libldap-2.4.so.2.10.9
+
+- name: Report on libldap check
+  ansible.builtin.debug:
+    msg: "{{ libldap_so }}"
+
+- name: Build + install libldap-2.4
+  when: not libldap_so.stat.exists
+
+  block:
+    - name: Install devel_basis (Build Essential)
+      become: yes
+      register: zypper
+      community.general.zypper:
+        update_cache: yes
+        state: present
+        type: pattern
+        name:
+          - devel_basis
+
+    - name: Report on zypper install
+      ansible.builtin.debug:
+        msg: "{{ zypper }}"
+
+      #become: no
+    - name: Fetch openldap source from git
+      become: yes
+      become_user: "{{ mongod_user }}"
+      ansible.builtin.git:
+        repo: 'https://git.openldap.org/openldap/openldap.git'
+        dest: /tmp/openldap
+        version: OPENLDAP_REL_ENG_2_4_46
+      environment:
+        GIT_SSL_NO_VERIFY: true
+
+      #become: no
+    - name: Run configure on openldap
+      become: yes
+      become_user: "{{ mongod_user }}"
+      ansible.builtin.command: ./configure --prefix=/usr/local
+      args:
+        chdir: /tmp/openldap
+        creates: config.log
+
+    # need to change to: build as user / install as root
+    - name: Build openldap / libldap (2.4-46)
+      become: yes
+      # notify: Rebuild ldconfig cache
+      community.general.make:
+        chdir: /tmp/openldap
+        target: "{{ item }}"
+        # params:
+          # NUM_THREADS: "{{ ansible_facts['processor_nproc'] }}"
+      loop:
+        - depend
+        - install
+
+
+- name: Make directories ( root )
+  become: yes
+  ansible.builtin.file:
+    state: directory
+    path: "{{ item }}"
+    mode: 0755
+  loop:
+    - "{{ mongod_root_path }}"
+    - "{{ mongod_server_path }}"
+    - "{{ mongod_server_bin_path }}"
+    - "{{ mongod_backup_path }}"
+    - "{{ mongod_backup_bin_path }}"
+    - "{{ mongod_client_path }}"
+    - "{{ mongod_client_bin_path }}"
+
+
+- name: Make directories ( "{{ mongod_user }}" )
+  become: yes
+  ansible.builtin.file:
+    state: directory
+    owner: "{{ mongod_user }}"
+    group: "{{ mongod_group }}"
+    path: "{{ item }}"
+    mode: 0755
+  loop:
+    - "{{ mongod_db_path }}"
+    - /var/log/mongodb
+    - /var/run/mongodb
+    # last one gets created by systemd service
+    # last two can be discussed
+
+# download from percona so not required on provisioning server/laptop?
+# currently in library on phone-link; so bandwidth premium.
+
+- name: Fetch Percona MongoDB-Server + MongoDB-Backup binary archives (tgz)
+  become: yes
+  ansible.builtin.get_url:
+    owner: root
+    group: root
+    mode: 0640
+    url: "{{ item.0 }}"
+    dest: /opt/percona/
+  loop: "{{ mongod_binary_archives }}"
+
+# - name: Send Percona MongoDB-Server + MongoDB-Backup binary archives (tgz)
+#   become: yes
+#   ansible.builtin.copy:
+#     owner: root
+#     group: root
+#     mode: 0640
+#     src: "files/opt/percona/{{ item.0 }}"
+#     dest: /opt/percona/
+#   loop: "{{ mongod_binary_archives }}"
+
+# broken? it was yer wonky eye
+- name: Unpack the archives
+  become: yes
+  ansible.builtin.unarchive:
+    owner: root
+    group: root
+    remote_src: true
+    src: "/opt/percona/{{ item.0 | basename }}"
+    dest:       "{{ item.1 }}"
+    extra_opts: "{{ item.2 }}"
+  loop: "{{ mongod_binary_archives }}"
+

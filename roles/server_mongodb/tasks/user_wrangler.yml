@@ -1,0 +1,59 @@
+---
+- name: Create group mongod
+  become: yes
+  ansible.builtin.group:
+    state: present
+    name: "{{ mongod_user }}"
+    gid:  "{{ mongod_ugid | default(omit) }}"
+
+- name: Create user named mongod
+  become: yes
+  ansible.builtin.user:
+    state: present
+    name: "{{ mongod_group }}"
+    uid: "{{ mongod_ugid | default(omit) }}"
+
+# Used to filter/run code against only existing users
+- name: GetUsers
+  register: user_shell
+  ansible.builtin.shell: cut -d':' -f 1 /etc/passwd
+
+- name: Set user_list fact
+  ansible.builtin.set_fact:
+    user_list: "{{ user_shell.stdout_lines }}"
+  when: user_shell.stdout_lines is defined
+
+- name: Print user_list
+  ansible.builtin.debug:
+    msg: "{{ user_list }}"
+
+# TODO: make per user not just "{{ mongod_user }}"
+# TODO: make a single loop over: user: [template1, template2]
+- name: Render out mongod user templates
+  become: yes
+  ansible.builtin.template:
+    src:  "templates/home/mongod/.bashrc-mongo.j2"
+    dest: "~{{ item }}/.bashrc-mongo"
+    owner: "{{ item }}" #mongod_user }}"
+#    group: "{{ item }}" #mongod_group }}"
+    mode: 0644
+  when: ( user_list | length ) > 0 and item in user_list
+  loop:
+    - "{{ mongod_user }}" # /home/mongod/.bashrc-mongo
+    - bio # /home/bio/.bashrc-mongo
+    - zaphod
+
+- name: Render mongoshrc.js (disableTelemetry)
+  become: yes
+  ansible.builtin.template:
+    src:  "templates/home/mongod/.mongoshrc.js.j2"
+    dest: "~{{ item }}/.mongoshrc.js"
+    owner: "{{ item }}" #mongod_user }}"
+#    group: "{{ item }}" #mongod_group }}"
+    mode: 0644
+  when: ( user_list | length ) > 0 and item in user_list
+  loop:
+    - "{{ mongod_user }}" # /home/mongod/.bashrc-mongo
+    - bio # /home/bio/.bashrc-mongo
+    - zaphod
+
