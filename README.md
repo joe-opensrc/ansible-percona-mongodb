@@ -1,4 +1,4 @@
-## An ansible role to install the vanilla Percona MongoDB Suite.
+## An ansible artifact + role to install the Percona MongoDB Suite.
 
 Installs onto (tested):
 
@@ -8,13 +8,12 @@ Installs onto (tested):
 
 ### Dependencies:
 
-  Host:
+Host:
 
 - ansible: v2.10.4
-
 - python:  v3.8.10
-  
-  Target hosts:
+
+Target hosts:
 
 - python:  v3.x (v3.8.10 tested)
 
@@ -114,3 +113,6 @@ ssh -l root -i ansible-ssh.key <container_ip>
 
 Then configure the host inventory + run the playbook! (see above).
 
+### Usage
+
+see [USAGE.md](USAGE.md)
