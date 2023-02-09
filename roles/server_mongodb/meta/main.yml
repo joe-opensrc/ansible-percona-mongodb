@@ -43,7 +43,7 @@ galaxy_info:
     - database 
     - system
      
-dependencies: 
-  - role: community.general.zypper
-  - role: community.general.make
+  dependencies: 
+    - role: community.general.zypper
+    - role: community.general.make
 
