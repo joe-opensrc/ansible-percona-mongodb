@@ -15,3 +15,13 @@ Systemd + dbus version:
 ```
 systemctl start mongod.service
 ```
+
+
+Client (mongosh):
+
+```
+su - mongod
+source ~/.bashrc-mongod
+mongosh
+```
+
