@@ -1,8 +1,17 @@
 ## Once Installed
 
+Server Start:
+
+Containerised version:
+
 ```
 su - mongod
 source ~/.bashrc-mongod
 mongod -f /etc/mongod.conf
-mongosh 
+```
+
+Systemd + dbus version:
+
+```
+systemctl start mongod.service
 ```
