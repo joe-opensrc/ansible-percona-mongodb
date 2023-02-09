@@ -114,8 +114,3 @@ ssh -l root -i ansible-ssh.key <container_ip>
 
 Then configure the host inventory + run the playbook! (see above).
 
-You might need to add the following to the static-hosts file:
-
-```
-ansible_ssh_private_key_file: ansible-ssh.key
-```
