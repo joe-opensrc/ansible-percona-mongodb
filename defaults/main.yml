@@ -1,97 +1,27 @@
 ---
 # defaults file for server-mongodb
 
-mongod_user:  mongod
+mongod_user: mongod
 mongod_group: mongod
 
-mongod_ugid: 6001 # change back or choose reasonable higher value...but collision with AD/LDAP are (approx):
-                   # uids: 20501-65534, gid: 20514-65534 
+mongod_ugid: 6001
 
 mongod_root_path: /opt/percona
 
-mongod_server_path:     "{{ mongod_root_path }}/mongodb-server"
+mongod_server_path: "{{ mongod_root_path }}/mongodb-server"
 mongod_server_bin_path: "{{ mongod_server_path }}/bin"
 
-mongod_backup_path:     "{{ mongod_root_path }}/mongodb-backup"
+mongod_backup_path: "{{ mongod_root_path }}/mongodb-backup"
 mongod_backup_bin_path: "{{ mongod_backup_path }}/bin"
 
-mongod_client_path:         "{{ mongod_root_path }}/mongodb-client/mongosh"
-mongod_client_bin_path:     "{{ mongod_client_path }}/bin"
+mongod_client_path: "{{ mongod_root_path }}/mongodb-client/mongosh"
+mongod_client_bin_path: "{{ mongod_client_path }}/bin"
 
 mongod_db_path: /data/db
-
-# mongod_binary_url: "https://downloads.percona.com/downloads/percona-distribution-mongodb-LATEST/percona-distribution-mongodb-5.0.6/binary/tarball"  
-# mongod_binary_url: "https://www.percona.com/downloads/percona-distribution-mongodb-4.4/percona-distribution-mongodb-4.4.9/binary/tarball"
 
 mongod_binary_url: "https://downloads.percona.com/downloads/percona-distribution-mongodb-LATEST/percona-distribution-mongodb-6.0.3/binary/tarball"
 
 mongod_binary_archives:
-- [ "{{ mongod_binary_url }}/percona-server-mongodb-6.0.3-2-x86_64.glibc2.17.tar.gz", "{{ mongod_server_path }}", [ --strip-components=1 ] ]
-- [ "{{ mongod_binary_url }}/percona-backup-mongodb-2.0.2-x86_64.tar.gz",             "{{ mongod_backup_path }}", [ --strip-components=1 ] ]
-- [ "{{ mongod_binary_url }}/percona-mongodb-mongosh-1.6.1-x86_64.tar.gz",            "{{ mongod_client_path }}", [ --strip-components=1 ] ]
-
-# mongod_binary_archives:
-#    - [ "{{ mongod_binary_url }}/percona-server-mongodb-4.4.9-10-x86_64.glibc2.17.tar.gz", "{{ mongod_server_path }}", [ --strip-components=1 ] ]
-#    - [ "{{ mongod_binary_url }}/percona-backup-mongodb-1.6.0-x86_64.tar.gz",              "{{ mongod_backup_path }}", [ --strip-components=1 ] ]
-#    - [ "https://downloads.mongodb.com/compass/mongosh-1.1.9-linux-x64.tgz",               "{{ mongod_client_path }}", [ --strip-components=1 ] ]
-
-    # - [ percona-server-mongodb-4.4.12-12-x86_64.glibc2.17.tar.gz, "{{ mongod_server_path }}", [ --strip-components=1 ] ]
-    # - [ percona-backup-mongodb-1.6.1-x86_64.tar.gz,               "{{ mongod_db_path }}",     [ --strip-components=1 ] ]
-
-  # - [ percona-server-mongodb-5.0.6-5-x86_64.glibc2.17.tar.gz, "{{ mongod_server_path }}", [ --strip-components=1 ] ]
-  # - [ percona-backup-mongodb-1.6.1-x86_64.tar.gz,             "{{ mongod_backup_path }}", [ --strip-components=1 ] ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# V5 now available:
-# on phonelink download later:
-
-#  https://downloads.percona.com/downloads/percona-distribution-mongodb-LATEST/percona-distribution-mongodb-5.0.6/binary/tarball/percona-backup-mongodb-1.6.1-x86_64.tar.gz
-#  https://downloads.percona.com/downloads/percona-distribution-mongodb-LATEST/percona-distribution-mongodb-5.0.6/binary/tarball/percona-server-mongodb-5.0.6-5-x86_64.glibc2.17.tar.gz
-
-# generic vault binaries
-#  https://releases.hashicorp.com/vault/1.9.3/vault_1.9.3_linux_amd64.zip
-
-
-
-
-  # - [ percona-server-mongodb-4.4.1-3-x86_64.glibc2.12.tar.gz, "{{ mongod_server_bin_path }}",  [ --strip-components=1 ] ]
-  # - [ percona-server-mongodb-4.4.8-9-x86_64.glibc2.17.tar.gz, "{{ mongod_server_bin_path }}",  [ --strip-components=1 ] ]
-
-
-
-#   path_prefix: "/srv/docker/registry" # {keys,certs,images} (could bind /datos3/Docker?)
-#   # path_prefix: "/root/openssl/docker/registry/{keys,certs}"
-#   host:
-#     name:   "{{ inventory_hostname_short }}"
-#     domain: "{{ fqdn }}"
-#     certs_dir: /etc/docker/certs.d
-
-#   http:
-#     addr: 
-#       host: 0.0.0.0
-#       port: 5000
-#   ca_cert:  "docker_CA_selfsigned.crt"
-#   ca_key:   "docker_CA_selfsigned.key"
-#   ca_csr:   "docker_CA_selfsigned.csr"
-
-#   reg_cert: "docker_registry.crt"
-#   reg_key:  "docker_registry.key"
-#   reg_csr:  "docker_registry.csr"
-
+  - ["{{ mongod_binary_url }}/percona-server-mongodb-6.0.3-2-x86_64.glibc2.17.tar.gz", "{{ mongod_server_path }}", [--strip-components=1]]
+  - ["{{ mongod_binary_url }}/percona-backup-mongodb-2.0.2-x86_64.tar.gz", "{{ mongod_backup_path }}", [--strip-components=1]]
+  - ["{{ mongod_binary_url }}/percona-mongodb-mongosh-1.6.1-x86_64.tar.gz", "{{ mongod_client_path }}", [--strip-components=1]]
