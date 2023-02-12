@@ -22,7 +22,7 @@ Dependencies
 Example Playbook
 ----------------
 
-See ../../server-mongodb.yml
+See ../../percona-mongodb.yml
 
 Example Test Env
 ----------------

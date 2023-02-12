@@ -1,5 +1,5 @@
 ---
-# defaults file for server-mongodb
+# defaults file for percona-mongodb
 
 mongod_user: mongod
 mongod_group: mongod
