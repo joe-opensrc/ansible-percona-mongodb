@@ -1,7 +1,0 @@
----
-- hosts: 
-    - mdb-test-server1
-  gather_facts: yes
- 
-  roles:
-    - role: percona_mongodb
