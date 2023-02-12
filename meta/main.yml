@@ -1,3 +1,4 @@
+---
 galaxy_info:
   namespace: joe_opensrc
   role_name: percona_mongodb
@@ -19,31 +20,24 @@ galaxy_info:
 
   min_ansible_version: 2.10
 
-  # If this a Container Enabled role, provide the minimum Ansible Container version.
-  # min_ansible_container_version:
-
-  #
-  # https://galaxy.ansible.com/api/v1/platforms/
-  #
   platforms:
     - name: SLES
-      versions: 
+      versions:
         - 15
     - name: opensuse
-      versions: 
+      versions:
         - 15.2
     - name: Debian
-      version: 
+      version:
         - 9.2
         - stretch
 
-  galaxy_tags: 
+  galaxy_tags:
     - mongodb
     - percona
-    - database 
+    - database
     - system
-     
-  dependencies: 
+
+  dependencies:
     - role: community.general.zypper
     - role: community.general.make
-
