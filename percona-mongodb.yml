@@ -4,4 +4,4 @@
   gather_facts: yes
  
   roles:
-    - role: server_mongodb
+    - role: percona_mongodb
