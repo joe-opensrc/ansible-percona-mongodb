@@ -1,4 +1,6 @@
 galaxy_info:
+  namespace: joe_opensrc
+  role_name: percona_mongodb
   author: Joe OpenSrc
   description:  Percona MongoDB Wrangler
   github_branch: galaxy-standalone-role 
