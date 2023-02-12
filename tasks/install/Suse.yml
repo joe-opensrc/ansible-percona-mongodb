@@ -2,10 +2,10 @@
 # install percona mongodb server + backup linux generic binaries
 
 - name: Install prequisites via package manager
-  become: yes
+  become: true
   register: zypper
   community.general.zypper:
-    update_cache: yes
+    update_cache: true
     state: present
     type: package
     name:
@@ -36,10 +36,10 @@
 
   block:
     - name: Install devel_basis (Build Essential)
-      become: yes
+      become: true
       register: zypper
       community.general.zypper:
-        update_cache: yes
+        update_cache: true
         state: present
         type: pattern
         name:
@@ -51,7 +51,7 @@
 
       #become: no
     - name: Fetch openldap source from git
-      become: yes
+      become: true
       become_user: "{{ mongod_user }}"
       ansible.builtin.git:
         repo: 'https://git.openldap.org/openldap/openldap.git'
@@ -62,7 +62,7 @@
 
       #become: no
     - name: Run configure on openldap
-      become: yes
+      become: true
       become_user: "{{ mongod_user }}"
       ansible.builtin.command: ./configure --prefix=/usr/local
       args:
@@ -71,7 +71,7 @@
 
     # need to change to: build as user / install as root
     - name: Build openldap / libldap (2.4-46)
-      become: yes
+      become: true
       # notify: Rebuild ldconfig cache
       community.general.make:
         chdir: /tmp/openldap
@@ -84,7 +84,7 @@
 
 
 - name: Make directories ( root )
-  become: yes
+  become: true
   ansible.builtin.file:
     state: directory
     path: "{{ item }}"
@@ -100,7 +100,7 @@
 
 
 - name: Make directories ( "{{ mongod_user }}" )
-  become: yes
+  become: true
   ansible.builtin.file:
     state: directory
     owner: "{{ mongod_user }}"
@@ -118,7 +118,7 @@
 # currently in library on phone-link; so bandwidth premium.
 
 - name: Fetch Percona MongoDB-Server + MongoDB-Backup binary archives (tgz)
-  become: yes
+  become: true
   ansible.builtin.get_url:
     owner: root
     group: root
@@ -128,7 +128,7 @@
   loop: "{{ mongod_binary_archives }}"
 
 # - name: Send Percona MongoDB-Server + MongoDB-Backup binary archives (tgz)
-#   become: yes
+#   become: true
 #   ansible.builtin.copy:
 #     owner: root
 #     group: root
@@ -139,7 +139,7 @@
 
 # broken? it was yer wonky eye
 - name: Unpack the archives
-  become: yes
+  become: true
   ansible.builtin.unarchive:
     owner: root
     group: root

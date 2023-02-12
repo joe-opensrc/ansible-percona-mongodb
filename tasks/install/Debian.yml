@@ -1,5 +1,5 @@
 - name: Make directories ( "{{ mongod_root_path }}" )
-  become: yes
+  become: true
   ansible.builtin.file:
     state: directory
     path: "{{ item }}"
@@ -8,7 +8,7 @@
     - "{{ mongod_root_path }}"
 
 - name: Make directories ( "{{ mongod_user }}" )
-  become: yes
+  become: true
   ansible.builtin.file:
     state: directory
     owner: "{{ mongod_user }}"
@@ -22,7 +22,7 @@
 
 - name: Install prequisites via package manager
   ansible.builtin.apt:
-    update_cache: yes
+    update_cache: true
     package:
       - lsb-release
       - curl
@@ -47,14 +47,14 @@
 
 - name: Install percona-release
   ansible.builtin.apt:
-    update_cache: yes
+    update_cache: true
     deb: "{{ mongod_root_path }}/{{ percona_release_deb }}"
 
 - name: Install Dependencies
   ansible.builtin.command: apt-get install -f
 
 - name: Enable psmdb-44 + pbm-backup release
-  become: yes
+  become: true
   ansible.builtin.command: "{{ item }}"
   loop:
     - percona-release enable psmdb-44 release
@@ -63,13 +63,13 @@
 
 - name: Install percona-release
   ansible.builtin.apt:
-    update_cache: yes
+    update_cache: true
     package:
       - percona-server-mongodb
       - percona-backup-mongodb
 
 - name: Render out mongod and systemd config
-  become: yes
+  become: true
   ansible.builtin.template:
     src:  "templates{{ item }}.j2"
     dest: "{{ item }}"

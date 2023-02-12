@@ -1,13 +1,13 @@
 ---
 - name: Create group mongod
-  become: yes
+  become: true
   ansible.builtin.group:
     state: present
     name: "{{ mongod_user }}"
     gid:  "{{ mongod_ugid | default(omit) }}"
 
 - name: Create user named mongod
-  become: yes
+  become: true
   ansible.builtin.user:
     state: present
     name: "{{ mongod_group }}"
@@ -30,7 +30,7 @@
 # TODO: make per user not just "{{ mongod_user }}"
 # TODO: make a single loop over: user: [template1, template2]
 - name: Render out mongod user templates
-  become: yes
+  become: true
   ansible.builtin.template:
     src:  "templates/home/mongod/.bashrc-mongo.j2"
     dest: "~{{ item }}/.bashrc-mongo"
@@ -44,7 +44,7 @@
     - zaphod
 
 - name: Render mongoshrc.js (disableTelemetry)
-  become: yes
+  become: true
   ansible.builtin.template:
     src:  "templates/home/mongod/.mongoshrc.js.j2"
     dest: "~{{ item }}/.mongoshrc.js"
