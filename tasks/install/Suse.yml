@@ -2,10 +2,10 @@
 # install percona mongodb server + backup linux generic binaries
 
 - name: Install prequisites via package manager
-  become: true
+  become: yes
   register: zypper
   community.general.zypper:
-    update_cache: true
+    update_cache: yes
     state: present
     type: package
     name:
@@ -36,10 +36,10 @@
 
   block:
     - name: Install devel_basis (Build Essential)
-      become: true
+      become: yes
       register: zypper
       community.general.zypper:
-        update_cache: true
+        update_cache: yes
         state: present
         type: pattern
         name:
@@ -50,7 +50,7 @@
         msg: "{{ zypper }}"
 
     - name: Fetch openldap source from git
-      become: true
+      become: yes
       become_user: "{{ mongod_user }}"
       ansible.builtin.git:
         repo: 'https://git.openldap.org/openldap/openldap.git'
@@ -60,7 +60,7 @@
         GIT_SSL_NO_VERIFY: true
 
     - name: Run configure on openldap
-      become: true
+      become: yes
       become_user: "{{ mongod_user }}"
       ansible.builtin.command: ./configure --prefix=/usr/local
       args:
@@ -69,7 +69,7 @@
 
     # need to change to: build as user / install as root
     - name: Build openldap / libldap (2.4-46)
-      become: true
+      become: yes
       # notify: Rebuild ldconfig cache
       community.general.make:
         chdir: /tmp/openldap
@@ -82,7 +82,7 @@
 
 
 - name: Make directories ( root )
-  become: true
+  become: yes
   ansible.builtin.file:
     state: directory
     path: "{{ item }}"
@@ -98,7 +98,7 @@
 
 
 - name: Make directories ( "{{ mongod_user }}" )
-  become: true
+  become: yes
   ansible.builtin.file:
     state: directory
     owner: "{{ mongod_user }}"
@@ -116,7 +116,7 @@
 # currently in library on phone-link; so bandwidth premium.
 
 - name: Fetch Percona MongoDB-Server + MongoDB-Backup binary archives (tgz)
-  become: true
+  become: yes
   ansible.builtin.get_url:
     owner: root
     group: root
@@ -126,7 +126,7 @@
   loop: "{{ mongod_binary_archives }}"
 
 # - name: Send Percona MongoDB-Server + MongoDB-Backup binary archives (tgz)
-#   become: true
+#   become: yes
 #   ansible.builtin.copy:
 #     owner: root
 #     group: root
@@ -137,7 +137,7 @@
 
 # broken? it was yer wonky eye
 - name: Unpack the archives
-  become: true
+  become: yes
   ansible.builtin.unarchive:
     owner: root
     group: root
