@@ -26,12 +26,10 @@ galaxy_info:
   platforms:
     - name: SLES
       versions: 
-        - 15.3 
         - 15
     - name: opensuse
       versions: 
         - 15.2
-        - 15
     - name: Debian
       version: 
         - 9.2
