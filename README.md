@@ -15,25 +15,19 @@ Role Variables
 
 Dependencies
 ------------
-  
+
   community.general.zypper  
   community.general.make
 
 Example Playbook
 ----------------
 
-See ../../percona-mongodb.yml
+See the playbook from the `main` branch: [server-mongodb.yml](https://github.com/joe-opensrc/ansible-percona-mongodb/blob/main/server-mongodb.yml)
 
 Example Test Env
 ----------------
 
-TODO:
-
-```
-# quite complicated to explain / setup. 
-# requires specific docker image 
-# plus ssh key generation.
-```
+See the `main` branch for a dockerised example: [README.md](https://github.com/joe-opensrc/ansible-percona-mongodb/blob/main/README.md)
 
 License
 -------
@@ -43,4 +37,4 @@ License
 Author Information
 ------------------
 
-  CopyLeft Joe OpenSrc
+  CopyLeft Joe OpenSrcG
