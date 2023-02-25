@@ -6,7 +6,7 @@ Install Percona Server + Backup for MongoDB onto openSUSE / SLES & Debian
 Requirements
 ------------
 
-  uses git-lfs to store percona binaries...
+ {{ Insert Joke Here }} 
 
 Role Variables
 --------------
@@ -37,4 +37,4 @@ License
 Author Information
 ------------------
 
-  CopyLeft Joe OpenSrcG
+  CopyLeft Joe OpenSrc
