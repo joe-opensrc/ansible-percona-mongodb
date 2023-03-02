@@ -6,7 +6,7 @@ Containerised version:
 
 ```
 su - mongod
-source ~/.bashrc-mongod
+source ~/.bashrc-mongo
 mongod -f /etc/mongod.conf
 ```
 
@@ -21,7 +21,7 @@ Client (mongosh):
 
 ```
 su - mongod
-source ~/.bashrc-mongod
+source ~/.bashrc-mongo
 mongosh
 ```
 
