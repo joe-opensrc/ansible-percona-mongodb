@@ -1,4 +1,5 @@
-## Will probably need to split this by OS shortly.
+---
+# Will probably need to split this by OS shortly.
 
 # may require ldconfig (possibly via handler)
 - name: Add ldconfig entry for new libs (copy file)
@@ -9,11 +10,11 @@
     src: "files/etc/ld.so.conf.d/mongo.conf"
     dest: "/etc/ld.so.conf.d/"
 
-  #note clever naming scheme :D
+# note clever naming scheme :D
 - name: Render out mongod and systemd config
   become: yes
   ansible.builtin.template:
-    src:  "templates{{ item }}.j2"
+    src: "templates{{ item }}.j2"
     dest: "{{ item }}"
     owner: root
     group: root
@@ -26,10 +27,10 @@
   become: yes
   ansible.builtin.file:
     state: link
-    src:  "/usr/lib/systemd/system/mongod.service"
+    src: "/usr/lib/systemd/system/mongod.service"
     dest: "/etc/systemd/system/multi-user.target.wants/mongod.service"
 
-  #handlers are annoying within roles
+# handlers are annoying within roles
 - name: Rebuild ldconfig cache
   become: yes
   ansible.builtin.command: /sbin/ldconfig "{{ mongod_server_path }}/lib" /usr/local/lib
@@ -38,4 +39,3 @@
   become: yes
   ignore_errors: true
   ansible.builtin.command: /bin/bash -c 'echo "never" >/sys/kernel/mm/transparent_hugepage/enabled'
-

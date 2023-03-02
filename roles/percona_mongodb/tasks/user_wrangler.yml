@@ -4,7 +4,7 @@
   ansible.builtin.group:
     state: present
     name: "{{ mongod_user }}"
-    gid:  "{{ mongod_ugid | default(omit) }}"
+    gid: "{{ mongod_ugid | default(omit) }}"
 
 - name: Create user named mongod
   become: yes
@@ -32,28 +32,23 @@
 - name: Render out mongod user templates
   become: yes
   ansible.builtin.template:
-    src:  "templates/home/mongod/.bashrc-mongo.j2"
+    src: "templates/home/mongod/.bashrc-mongo.j2"
     dest: "~{{ item }}/.bashrc-mongo"
-    owner: "{{ item }}" #mongod_user }}"
-#    group: "{{ item }}" #mongod_group }}"
+    owner: "{{ item }}"
+    # group: "{{ item }}" #mongod_group }}"
     mode: 0644
   when: ( user_list | length ) > 0 and item in user_list
   loop:
-    - "{{ mongod_user }}" # /home/mongod/.bashrc-mongo
-    - bio # /home/bio/.bashrc-mongo
-    - zaphod
+    - "{{ mongod_user }}"  # /home/mongod/.bashrc-mongo
 
 - name: Render mongoshrc.js (disableTelemetry)
   become: yes
   ansible.builtin.template:
-    src:  "templates/home/mongod/.mongoshrc.js.j2"
+    src: "templates/home/mongod/.mongoshrc.js.j2"
     dest: "~{{ item }}/.mongoshrc.js"
-    owner: "{{ item }}" #mongod_user }}"
-#    group: "{{ item }}" #mongod_group }}"
+    owner: "{{ item }}"
+    # group: "{{ item }}" #mongod_group }}"
     mode: 0644
   when: ( user_list | length ) > 0 and item in user_list
   loop:
-    - "{{ mongod_user }}" # /home/mongod/.bashrc-mongo
-    - bio # /home/bio/.bashrc-mongo
-    - zaphod
-
+    - "{{ mongod_user }}"  # /home/mongod/.bashrc-mongo

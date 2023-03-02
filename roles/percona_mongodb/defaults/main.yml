@@ -1,0 +1,27 @@
+---
+# defaults file for percona-mongodb
+
+mongod_user: mongod
+mongod_group: mongod
+
+mongod_ugid: 6001
+
+mongod_root_path: /opt/percona
+
+mongod_server_path: "{{ mongod_root_path }}/mongodb-server"
+mongod_server_bin_path: "{{ mongod_server_path }}/bin"
+
+mongod_backup_path: "{{ mongod_root_path }}/mongodb-backup"
+mongod_backup_bin_path: "{{ mongod_backup_path }}/bin"
+
+mongod_client_path: "{{ mongod_root_path }}/mongodb-client/mongosh"
+mongod_client_bin_path: "{{ mongod_client_path }}/bin"
+
+mongod_db_path: /data/db
+
+mongod_binary_url: "https://downloads.percona.com/downloads/percona-distribution-mongodb-LATEST/percona-distribution-mongodb-6.0.3/binary/tarball"
+
+mongod_binary_archives:
+  - ["{{ mongod_binary_url }}/percona-server-mongodb-6.0.3-2-x86_64.glibc2.17.tar.gz", "{{ mongod_server_path }}", [--strip-components=1]]
+  - ["{{ mongod_binary_url }}/percona-backup-mongodb-2.0.2-x86_64.tar.gz", "{{ mongod_backup_path }}", [--strip-components=1]]
+  - ["{{ mongod_binary_url }}/percona-mongodb-mongosh-1.6.1-x86_64.tar.gz", "{{ mongod_client_path }}", [--strip-components=1]]

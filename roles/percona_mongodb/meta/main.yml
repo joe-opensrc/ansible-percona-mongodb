@@ -1,7 +1,10 @@
+---
 galaxy_info:
+  namespace: joe_opensrc
+  role_name: percona_mongodb
   author: Joe OpenSrc
-  description:  Percona MongoDB Wrangler
-
+  description: Percona MongoDB Wrangler
+  github_branch: galaxy-standalone-role
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
   # issue_tracker_url: http://example.com/issue/tracker
@@ -15,35 +18,26 @@ galaxy_info:
   # - CC-BY-4.0
   license: GPL-2.0
 
-  min_ansible_version: 2.10
+  min_ansible_version: 2.10.4
 
-  # If this a Container Enabled role, provide the minimum Ansible Container version.
-  # min_ansible_container_version:
-
-  #
-  # https://galaxy.ansible.com/api/v1/platforms/
-  #
   platforms:
     - name: SLES
-      versions: 
-        - 15.3 
+      versions:
         - 15
     - name: opensuse
-      versions: 
+      versions:
         - 15.2
-        - 15
     - name: Debian
-      version: 
+      version:
         - 9.2
         - stretch
 
-  galaxy_tags: 
+  galaxy_tags:
     - mongodb
     - percona
-    - database 
+    - database
     - system
-     
-  dependencies: 
+
+  dependencies:
     - role: community.general.zypper
     - role: community.general.make
-
