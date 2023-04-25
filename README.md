@@ -46,29 +46,17 @@ git clone https://gitlab.com/joe-opensrc/ansible-percona-mongodb.git
 cd ansible-percona-mongodb
 ```
 
-### Correctly configure hostnames
+## Correctly configure hostnames
 
-TODO: Instructions to follow...
+This was a manual step, but is now dynamically scripted.
+It should now JustWork⁽™⁾ :)
 
-```
-cd hosts
-vim static-hosts # 
-```
 
-E.g.,
-
-```
-all:
-  hosts:
-    mdb-test-server1:
-      ansible_host: 10.30.0.2
-      ansible_user: root
-```
-
-## Run the playbook against the target hosts
+## Run the playbook against the target host(s)
 
 ```
 source ~/pyvirts/ansible/bin/activate
+export ANSIBLE_DOCKER_FILTER="name=mdb-test-server1" # optional 
 ansible-playbook -i hosts server-mongodb.yml
 ```
 
