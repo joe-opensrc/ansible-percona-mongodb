@@ -1,0 +1,10 @@
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive 
+RUN apt-get update && apt-get install -y --no-install-recommends less strace iproute2 vim lsof bash-completion git python3 sudo ca-certificates openssh-server python3 sudo tzdata
+
+RUN mkdir /run/sshd
+
+# entrypoint is arbitary to keep the container running... ;)
+RUN ssh-keygen -A
+ENTRYPOINT ["/usr/sbin/sshd", "-D"]

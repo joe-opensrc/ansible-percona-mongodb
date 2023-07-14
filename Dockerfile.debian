@@ -1,0 +1,10 @@
+FROM debian:bullseye
+
+ENV DEBIAN_FRONTEND=noninteractive 
+RUN apt-get update && apt-get install -y --no-install-recommends less strace iproute2 vim lsof bash-completion git python3 sudo ca-certificates openssh-server python3 sudo tzdata
+
+RUN mkdir /run/sshd
+RUN ssh-keygen -A
+
+# entrypoint is arbitary to keep the container running... ;)
+ENTRYPOINT ["/usr/sbin/sshd", "-D"]
