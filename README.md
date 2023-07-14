@@ -3,8 +3,12 @@
 Installs onto (tested):
 
 - SLES:     v15.3 (HPC)
-- OpenSUSE: v15.2
-- Debian:   v9.2
+- OpenSUSE: v15.2 (leap)
+- Debian:   
+    - v11 (bullseye)
+    - v9.2 (stretch)
+- Ubuntu:   v22.04.2 (LTS (Jammy Jellyfish))"
+
 
 ### Dependencies:
 
