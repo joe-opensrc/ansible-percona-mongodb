@@ -46,7 +46,7 @@ However, this hasn't been tested here, and is little beyond the scope of this do
 ### Clone the ansible role + playbook
 
 ```
-git clone https://gitlab.com/joe-opensrc/ansible-percona-mongodb.git
+git clone --recurse-submodules https://gitlab.com/joe-opensrc/ansible-percona-mongodb
 cd ansible-percona-mongodb
 ```
 
