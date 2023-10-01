@@ -1,3 +1,5 @@
+[![Docker Image CI](https://github.com/joe-opensrc/ansible-percona-mongodb/actions/workflows/docker-image.yml/badge.svg)](https://github.com/joe-opensrc/ansible-percona-mongodb/actions/workflows/docker-image.yml)
+
 ## An ansible artifact + role to install the Percona MongoDB Suite.
 
 Installs onto (tested):
