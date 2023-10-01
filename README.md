@@ -1,4 +1,4 @@
-[![Docker Image CI -- opensuse/leap:latest](https://github.com/joe-opensrc/ansible-percona-mongodb/actions/workflows/docker-image-opensuse-leap.yml/badge.svg)](https://github.com/joe-opensrc/ansible-percona-mongodb/actions/workflows/docker-image.yml)</br>
+[![Docker Image CI -- opensuse/leap:latest](https://github.com/joe-opensrc/ansible-percona-mongodb/actions/workflows/docker-image-opensuse-leap.yml/badge.svg)](https://github.com/joe-opensrc/ansible-percona-mongodb/actions/workflows/docker-image-opensuse-leap.yml)</br>
 [![Docker Image CI -- ubuntu:20.04](https://github.com/joe-opensrc/ansible-percona-mongodb/actions/workflows/docker-image-ubuntu-20.04.yml/badge.svg)](https://github.com/joe-opensrc/ansible-percona-mongodb/actions/workflows/docker-image-ubuntu-20.04.yml)</br>
 [![Docker Image CI -- debian:bullseye](https://github.com/joe-opensrc/ansible-percona-mongodb/actions/workflows/docker-image-debian-bullseye.yml/badge.svg)](https://github.com/joe-opensrc/ansible-percona-mongodb/actions/workflows/docker-image-debian-bullseye.yml)
 
