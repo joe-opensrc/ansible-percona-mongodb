@@ -1,5 +1,6 @@
 [![Docker Image CI -- opensuse/leap:latest](https://github.com/joe-opensrc/ansible-percona-mongodb/actions/workflows/docker-image.yml/badge.svg)](https://github.com/joe-opensrc/ansible-percona-mongodb/actions/workflows/docker-image.yml)</br>
-[![Docker Image CI -- ubuntu:20.04](https://github.com/joe-opensrc/ansible-percona-mongodb/actions/workflows/docker-image-ubuntu-20.04.yml/badge.svg)](https://github.com/joe-opensrc/ansible-percona-mongodb/actions/workflows/docker-image-ubuntu-20.04.yml)
+[![Docker Image CI -- ubuntu:20.04](https://github.com/joe-opensrc/ansible-percona-mongodb/actions/workflows/docker-image-ubuntu-20.04.yml/badge.svg)](https://github.com/joe-opensrc/ansible-percona-mongodb/actions/workflows/docker-image-ubuntu-20.04.yml)</br>
+[![Docker Image CI -- debian:bullseye](https://github.com/joe-opensrc/ansible-percona-mongodb/actions/workflows/docker-image-debian-bullseye.yml/badge.svg)](https://github.com/joe-opensrc/ansible-percona-mongodb/actions/workflows/docker-image-debian-bullseye.yml)
 
 ## An ansible artifact + role to install the Percona MongoDB Suite.
 
